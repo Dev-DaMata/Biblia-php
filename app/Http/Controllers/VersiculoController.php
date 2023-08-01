@@ -21,6 +21,15 @@ class VersiculoController extends Controller
     public function store(Request $request)
     {
         return Versiculo::create($request->all());
+        if(Versiculo::create($request->all())){
+            return response()->json([
+                'message' => 'Livro cadastrado com sucesso.'
+            ], 201);
+        }else{
+            return response()->json([
+                'message' => 'erro ao cadastrar o Livro.'
+            ], 404);
+        }
     }
 
     /**
@@ -28,7 +37,14 @@ class VersiculoController extends Controller
      */
     public function show($Versiculo) //tudo que tem id pode ser trocado por id pois estamos chamando as rotas de outra forma
     {
-        return Versiculo::findOrFail($Versiculo);
+        $Versiculo = Versiculo::find($Versiculo);//o find pesquisa pelo id da chave primaria
+        if($Versiculo){
+            return $Versiculo ;
+        }else{
+            return response()->json([
+                'message' => 'erro ao pesquisar o Livro.'
+            ], 404);
+        }
     }
 
     /**
@@ -36,9 +52,15 @@ class VersiculoController extends Controller
      */
     public function update(Request $request, string $Versiculo)
     {
-        $Versiculo = Versiculo::findOrFail($Versiculo);
-        $Versiculo->update($request->all());//o all nesse casso é para fazer todos os campos
-        return $Versiculo;
+        $Versiculo = Versiculo::find($Versiculo);
+        if ($Versiculo) {
+            $Versiculo->update($request->all());//o all nesse casso é para fazer todos os campos
+            return $Versiculo;
+        }else{
+            return response()->json([
+                'message' => 'erro ao atualizar o Livro.'
+            ], 404);
+        }
     }
 
     /**
@@ -46,6 +68,12 @@ class VersiculoController extends Controller
      */
     public function destroy(string $Versiculo)
     {
-        return Versiculo::destroy($Versiculo);
+        if(Versiculo::destroy($Versiculo)){
+            return ;
+        }else{
+            return response()->json([
+                'message' => 'erro ao excluir o Livro.'
+            ], 404);
+        }
     }
 }

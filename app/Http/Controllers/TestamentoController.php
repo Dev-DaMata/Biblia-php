@@ -20,7 +20,16 @@ class TestamentoController extends Controller
      */
     public function store(Request $request)
     {
-        return Testamento::create($request->all());
+        if(Testamento::create($request->all())){
+            return response()->json([
+                'message' => 'Livro cadastrado com sucesso.'
+            ], 201);
+        }else{
+            return response()->json([
+                'message' => 'erro ao cadastrar o Livro.'
+            ], 404);
+        }
+
     }
 
     /**
@@ -28,7 +37,14 @@ class TestamentoController extends Controller
      */
     public function show($testamento)
     {
-        return Testamento::findOrFail($testamento);//o findOrFail vai dar erro 404 se não achar o id
+        $Testamento = Testamento::find($testamento);//o find pesquisa pelo id da chave primaria
+        if($Testamento){
+            return $Testamento ;
+        }else{
+            return response()->json([
+                'message' => 'erro ao pesquisar o Livro.'
+            ], 404);
+        }
     }
 
     /**
@@ -36,9 +52,15 @@ class TestamentoController extends Controller
      */
     public function update(Request $request, $testamento)
     {
-        $testamento = Testamento::findOrFail($testamento);
-        $testamento->update($request->all());//o all nesse casso é para fazer todos os campos
-        return $testamento;
+        $testamento = Testamento::find($testamento);
+        if ($testamento) {
+            $testamento->update($request->all());//o all nesse casso é para fazer todos os campos
+            return $testamento;
+        }else{
+            return response()->json([
+                'message' => 'erro ao atualizar o Livro.'
+            ], 404);
+        }
     }
 
     /**
@@ -46,6 +68,13 @@ class TestamentoController extends Controller
      */
     public function destroy($testamento)
     {
-        return Testamento::destroy($testamento);
+
+        if(Testamento::destroy($testamento)){
+            return ;
+        }else{
+            return response()->json([
+                'message' => 'erro ao excluir o Livro.'
+            ], 404);
+        }
     }
 }
