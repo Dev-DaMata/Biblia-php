@@ -30,14 +30,24 @@ Route::get('/livro/{id}', [LivroController::class, 'show']);
 Route::post('/livro', [LivroController::class, 'store']);
 Route::put('/livro/{id}', [LivroController::class, 'update']);
 Route::delete('/livro/{id}', [LivroController::class, 'destroy']);
-
+/*
 Route::get('/versiculo', [VersiculoController::class, 'index']);
 Route::get('/versiculo::create($request->all());/{id}', [VersiculoController::class, 'show']);
 Route::post('/versiculo', [VersiculoController::class, 'store']);
 Route::put('/versiculo/{id}', [VersiculoController::class, 'update']);
 Route::delete('/versiculo/{id}', [VersiculoController::class, 'destroy']);
+*/
+/*
+Route::apiResource('testamento', TestamentoController::class);//dessa forma só precisa definir uma vez
+Route::apiResource('livro', LivroController::class);//dessa forma só precisa definir uma vez
+Route::apiResource('versiculo', VersiculoController::class);//dessa forma só precisa definir uma vez
+*/
+Route::apiResources([//dessa forma só precisa definir uma vez
+    'testamento' => TestamentoController::class,
+    'livro' => LivroController::class,
+    'versiculo' => VersiculoController::class
+]);
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum',VersiculoController::class)->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -27,17 +27,17 @@ class LivroController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($livro)
     {
-        return Livro::findOrFail($id);
+        return Livro::findOrFail($livro);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,  $livro)
     {
-        $livro = Livro::findOrFail($id);
+        $livro = Livro::findOrFail($livro);
         $livro->update($request->all());//o all nesse casso é para fazer todos os campos
         return $livro;
     }
@@ -45,8 +45,8 @@ class LivroController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($livro)
     {
-        return Livro::destroy($id);
+        return Livro::destroy($livro);
     }
 }

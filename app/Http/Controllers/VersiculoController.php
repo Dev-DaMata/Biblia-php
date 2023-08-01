@@ -26,17 +26,17 @@ class VersiculoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($Versiculo) //tudo que tem id pode ser trocado por id pois estamos chamando as rotas de outra forma
     {
-        return Versiculo::findOrFail($id);
+        return Versiculo::findOrFail($Versiculo);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $Versiculo)
     {
-        $Versiculo = Versiculo::findOrFail($id);
+        $Versiculo = Versiculo::findOrFail($Versiculo);
         $Versiculo->update($request->all());//o all nesse casso é para fazer todos os campos
         return $Versiculo;
     }
@@ -44,8 +44,8 @@ class VersiculoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $Versiculo)
     {
-        return Versiculo::destroy($id);
+        return Versiculo::destroy($Versiculo);
     }
 }
