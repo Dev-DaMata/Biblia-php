@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestamentoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Function_;
@@ -15,9 +16,9 @@ use PhpParser\Node\Stmt\Function_;
 |
 */
 
-Route::get('/teste', Function(){
-    return 'Teste com sucesso';
-});
+Route::get('/teste',);
+Route::post('/testamento', [TestamentoController::class, 'store']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
