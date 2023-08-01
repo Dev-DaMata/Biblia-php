@@ -20,6 +20,7 @@ Route::get('/testamento', [TestamentoController::class, 'index']);
 Route::get('/testamento/{id}', [TestamentoController::class, 'show']);
 Route::post('/testamento', [TestamentoController::class, 'store']);
 Route::put('/testamento/{id}', [TestamentoController::class, 'update']);
+Route::delete('/testamento/{id}', [TestamentoController::class, 'destroy']);
 
 
 

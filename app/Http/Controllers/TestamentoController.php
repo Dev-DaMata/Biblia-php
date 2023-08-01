@@ -46,6 +46,6 @@ class TestamentoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Testamento::destroy($id);
     }
 }
