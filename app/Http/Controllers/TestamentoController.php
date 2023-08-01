@@ -28,7 +28,7 @@ class TestamentoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Testamento::findOrFail($id);//o findOrFail vai dar erro 404 se não achar o id
     }
 
     /**
