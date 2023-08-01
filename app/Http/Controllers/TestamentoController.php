@@ -36,7 +36,9 @@ class TestamentoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $testamento = Testamento::findOrFail($id);
+        $testamento->update($request->all());//o all nesse casso é para fazer todos os campos
+        return $testamento;
     }
 
     /**
