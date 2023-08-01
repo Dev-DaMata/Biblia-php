@@ -16,8 +16,9 @@ use PhpParser\Node\Stmt\Function_;
 |
 */
 
-Route::get('/teste',);
+Route::get('/testamento', [TestamentoController::class, 'index']);
 Route::post('/testamento', [TestamentoController::class, 'store']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

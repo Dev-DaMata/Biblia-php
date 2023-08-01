@@ -12,7 +12,7 @@ class TestamentoController extends Controller
      */
     public function index()
     {
-        //
+        return Testamento::all();//para retonar todos os dados
     }
 
     /**
