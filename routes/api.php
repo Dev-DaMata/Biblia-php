@@ -47,7 +47,23 @@ Route::apiResources([//dessa forma só precisa definir uma vez
     'livro' => LivroController::class,
     'versiculo' => VersiculoController::class
 ]);
-
-Route::middleware('auth:sanctum',VersiculoController::class)->get('/user', function (Request $request) {
+//mudar de santum para api // se não funcionar retire o Versiculo controller
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/login', function(Request $request){
+    $credantials = $request->only(['email', 'password']);//pegar as credencias
+
+    if(!$token = auth()->attempt($credantials)){
+        abort(401,'Unauthorized');
+    }
+
+    return response()->json([
+        'data' => [
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60 //tempo para ele expirar
+        ]
+    ]);
 });
